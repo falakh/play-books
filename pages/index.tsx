@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { MdStarRate } from "react-icons/md";
 import { useSearchBookstore } from "../store/search-book.store";
 import { useEffect } from "react";
+import { IoHeartOutline } from "react-icons/io5";
 
 const Home: NextPage = () => {
   const router = useRouter();
@@ -32,9 +33,15 @@ const Home: NextPage = () => {
                 )}
               </div>
 
-              <h5 className="text-2xl font-bold tracking-tight text-ellipsis h-16 overflow-hidden  text-gray-900 dark:text-white">
-                {value.title}
-              </h5>
+              <div className="flex">
+                <h5 className="text-2xl font-bold tracking-tight text-ellipsis h-16 overflow-hidden  text-gray-900 dark:text-white">
+                  {value.title}
+                </h5>
+                <button onClick={() => alert(value.id)}>
+                  <IoHeartOutline />
+                </button>
+              </div>
+
               <p className="font-normal text-ellipsis text-gray-700 h-28 overflow-auto dark:text-gray-400">
                 {value.description}
               </p>
