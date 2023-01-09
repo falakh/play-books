@@ -3,14 +3,17 @@ import { useRouter } from "next/router";
 import { MdStarRate } from "react-icons/md";
 import { useSearchBookstore } from "../store/search-book.store";
 import { useEffect } from "react";
-import { IoHeartOutline } from "react-icons/io5";
+import { IoHeartOutline, IoHeartSharp } from "react-icons/io5";
+import { useFavoriteBookstore } from "../store/favorite-book.store";
 
 const Home: NextPage = () => {
   const router = useRouter();
   const { requestBook, books, isLoading } = useSearchBookstore();
+  const { saveBook, books: favoriteBooks, hydrate } = useFavoriteBookstore();
 
   useEffect(() => {
     if (router.query.keyword) requestBook(router.query.keyword as string);
+    hydrate();
   }, [router.query.keyword]);
 
   return (
@@ -37,8 +40,8 @@ const Home: NextPage = () => {
                 <h5 className="text-2xl font-bold tracking-tight text-ellipsis h-16 overflow-hidden  text-gray-900 dark:text-white">
                   {value.title}
                 </h5>
-                <button onClick={() => alert(value.id)}>
-                  <IoHeartOutline />
+                <button onClick={() => saveBook(value)}>
+                  {favoriteBooks.find((favorite) => value.id === favorite.id) ? <IoHeartSharp /> : <IoHeartOutline />}
                 </button>
               </div>
 
