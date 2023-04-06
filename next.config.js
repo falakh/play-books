@@ -5,11 +5,11 @@ module.exports = {
     return [
       {
         source: "/",
-        destination: "/favorite",
+        destination: "/",
         permanent: true,
       },
       {
-        source: "/favorite",
+        source: "/",
         destination: "/",
         permanent: true,
       },
